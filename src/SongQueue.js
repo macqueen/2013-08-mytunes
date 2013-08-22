@@ -13,7 +13,15 @@ var SongQueue = Songs.extend({
         this.playFirst();
       }
     }, this);
+
+    this.on('dequeue', function(){
+      this.shift();
+      if (this.length === 1) {
+        this.playFirst();
+      }
+    }, this);
   },
+
 
   playFirst: function(){
     this.at(0).play();
