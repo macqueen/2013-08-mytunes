@@ -1,14 +1,15 @@
 var SongQueue = Songs.extend({
 
   initialize: function(){
-    var that = this;
-    this.on('add', this.playFirst);
+    this.on('add', function(){
+      if (this.length === 1) {
+        this.playFirst();
+      }
+    }, this);
   },
 
   playFirst: function(){
-    if (this.at(1) === undefined) {
-      this.at(0).play();
-    }
+    this.at(0).play();
   }
 
 });
