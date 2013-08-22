@@ -1,0 +1,107 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww12840\viewh18060\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\b\fs24 \cf0 Song
+\b0 : 
+\i model
+\i0 \
+	play: this.trigger('play', this); <- there must be a play event that is being listened to.\
+	** enqueue: adds to queue + triggers an enqueue event\
+	**dequeue: triggers a dequeue event\
+\
+Listening for: libraryEntryView's click\
+Emitting: an enqueue event, dequeue event\
+\
+
+\b LibraryEntryView
+\b0 : 
+\i view
+\i0 \
+	tagName: 'tr' <- look that up.\
+	template: _.template('<td>(<%= artist %>)</td><td><%= title %></td>'), \
+	events: on click calls 
+\b play()
+\b0  on it's model\
+	render: appends to dom in a tr. \
+	** queues clicked songs, visually. right? alerts the DOM.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Listening for: \
+Emitting: click call to song's play\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+
+\b PlayerView
+\b0 : 
+\i view
+\i0 \
+	el: html5 audio controller\
+	initialize is blank <- is it necessary?\
+	
+\b setSong
+\b0 : it sets it's own model to the song model entered.\
+	render: adds itself to the dom.\
+	** when a song ends, it dequeues it and plays the next song in queue. (view version)\
+	**most likely will need to call set song on the next song, which will then have to have it's own play called on it\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Listening for: Changes in queue.\
+Emitting:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+
+\b SongQueue
+\b0 : 
+\i collection
+\i0 \
+	it is a subset of songs --> it's just extending the song Collection\
+	**
+\b playFirst()
+\b0  should always be called by 
+\b songQueue
+\b0 , it should play the first song in the queue\
+	** dequeuing should remove song\
+	**when a song is added, it should play immediately if it's the only one in there, else, it should wait its turn\
+	**when a song ends, it should be removed from the queue and play the next song (if there is one) (model version)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Listening for: \
+Emitting:  queue notifiers\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+
+\b SongQueueView
+\b0 : 
+\i view
+\i0 \
+	currently just an empty initialize function\
+	and a basic render function\
+	** creates 
+\b SongQueueEntryViews
+\b0  for each queued song + renders them\
+	** spec suggests that it should take a collection of songs as a parameter\
+	** renders every time the list of songs (
+\b SongQueue
+\b0 ) changes \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Listening for: changes to SongQueue\
+Emitting: \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+
+\b App
+\b0 : 
+\i model\
+
+\i0 \
+Listening for: Song's play trigger to set the current song\
+Emitting:\
+\
+Uncomment the specs in spec/SongQueueSpec.js & spec/SongQueueViewSpec.js and make them pass by adding a song queue to your app.\
+Complete the specs in spec/PlayerViewSpec.js that govern application behavior during song transitions, and implement the specified functionality.\
+\
+:) <)))))><}
