@@ -1,5 +1,5 @@
 describe('SongQueue', function() {
-  var playSpy, songData1, songData2;
+  var playSpy, songData1, songData2, songs;
 
   beforeEach(function() {
     playSpy = spyOn(SongQueue.prototype, 'playFirst').andCallThrough();
@@ -13,6 +13,7 @@ describe('SongQueue', function() {
       url: '/test/testsong2.mp3',
       title:'test song 2'
     };
+    songs = new Songs([songData1, songData2]);
   });
 
   afterEach(function() {
@@ -24,7 +25,7 @@ describe('SongQueue', function() {
     describe('and it is the only song in the song queue', function() {
       it('plays it', function() {
         var songQueue = new SongQueue();
-        songQueue.add(songData1);
+        songQueue.add(songs.at(0));
         expect(playSpy).toHaveBeenCalled();
       });
     });
@@ -32,7 +33,7 @@ describe('SongQueue', function() {
     describe('and it is not the only song in the song queue', function() {
       it('does nothing', function() {
         var songQueue = new SongQueue(songData1);
-        songQueue.add(songData2);
+        songQueue.add(songs.at(1));
         expect(playSpy).not.toHaveBeenCalled();
       });
     });
