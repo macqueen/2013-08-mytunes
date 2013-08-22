@@ -5,6 +5,7 @@ var PlayerView = Backbone.View.extend({
   initialize: function() {
     var that = this;
     that.$el.on('ended', function(){
+      that.model.set('playCount', that.model.get('playCount')+1);
       that.model.dequeue();
     });
   },
