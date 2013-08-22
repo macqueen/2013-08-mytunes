@@ -9,10 +9,6 @@ var App = Backbone.Model.extend({
       songQueue.push(song);
     });
 
-    params.library.on('dequeue', function(){
-      songQueue.shift();
-    });
-
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);
