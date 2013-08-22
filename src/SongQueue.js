@@ -6,6 +6,7 @@ var SongQueue = Songs.extend({
         this.playFirst();
       }
     }, this);
+
   },
 
   playFirst: function(){
