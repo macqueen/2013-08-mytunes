@@ -32,7 +32,7 @@ describe('SongQueue', function() {
 
     describe('and it is not the only song in the song queue', function() {
       it('does nothing', function() {
-        var songQueue = new SongQueue(songData1);
+        var songQueue = new SongQueue(songs.at(0));
         songQueue.add(songs.at(1));
         expect(playSpy).not.toHaveBeenCalled();
       });
