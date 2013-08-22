@@ -42,9 +42,9 @@ describe('SongQueue', function() {
   describe('when a song ends', function() {
     it('removes the song from the queue', function() {
       var songQueue = new SongQueue([songData1, songData2]);
-      song2 = songQueue.at(1);
+      var song2 = songQueue.at(1);
       expect(songQueue.length).toEqual(2);
-      songQueue.at(0).trigger('ended');
+      songQueue.at(0).ended();
       expect(songQueue.length).toEqual(1);
       expect(songQueue.at(0)).toEqual(song2);
     });
