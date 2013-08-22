@@ -5,7 +5,7 @@ describe('LibraryEntryView', function() {
     model = new Song({
       artist: 'Fakey McFakerson',
       title: 'Never Gonna Mock You Up',
-      url: 'example/url',
+      url: 'example/url'
     });
     // spyOn(Song.prototype, 'enqueue'); // Uncomment this when working on the second test
     spyOn(Song.prototype, 'play');
@@ -13,13 +13,13 @@ describe('LibraryEntryView', function() {
     view.render();
   });
 
-  it('plays clicked songs', function(){
+  xit('plays clicked songs', function(){
     view.$el.children().first().click();
     expect(model.play).toHaveBeenCalled();
   });
 
   // Comment out the above spec when implementing the below
-  xit('queues clicked songs', function(){
+  it('queues clicked songs', function(){
     view.$el.children().first().click();
     expect(model.enqueue).toHaveBeenCalled();
   });
