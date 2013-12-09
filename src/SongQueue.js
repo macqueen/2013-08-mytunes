@@ -28,6 +28,7 @@ var SongQueue = Songs.extend({
 
   playRandom: function() {
     var randomIndex = Math.floor((Math.random() * this.length));
+    console.log(randomIndex);
     console.log('now playing: ', this.at(randomIndex).attributes.title);
     this.at(randomIndex).play();
   },

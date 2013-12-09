@@ -1,6 +1,8 @@
 var AppView = Backbone.View.extend({
 
-  template: _.template('<div class="random">Random?<input type="checkbox" <% if (random) { %>checked="checked"<% } %></div>'),
+  template: _.template('<div class="random">Randomize it!<input type="checkbox" <% if (random) { %>checked="checked"<% } %></div>'),
+
+  currentTemplate: _.template('<div class="title">Welcome to MyTunes</div>'),
 
   events: {
     'click .random :checkbox' : function() {
@@ -17,7 +19,10 @@ var AppView = Backbone.View.extend({
   },
 
   render: function(){
+    this.$el.addClass('container');
+    var currentSong = this.model.get('currentSong');
     return this.$el.html([
+      this.currentTemplate(currentSong),
       this.playerView.$el,
       new LibraryView({collection: this.model.get('library')}).render(),
       new SongQueueView({collection: this.model.get('songQueue')}).render(),
