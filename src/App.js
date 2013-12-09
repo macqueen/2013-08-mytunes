@@ -17,6 +17,8 @@ var App = Backbone.Model.extend({
 
   updateRandom: function() {
     this.set('random', !this.get('random'));
+    var random = this.get('random');
+    this.get('songQueue').updateSongQRandom(random);
   }
 
 });
